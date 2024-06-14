@@ -23,9 +23,9 @@ class  ProductsListObject: ObservableObject {
     }
     
     /// Getting the api services singleton
-    private let productListServices: APIServicesProtocol
+    private let productListServices: DataBaseServiceProtocol
     
-    init(productServices: APIServicesProtocol = APIServices.shared){
+    init(productServices: DataBaseServiceProtocol = DatabaseService.shared){
         self.productListServices = productServices
     }
     
@@ -36,7 +36,7 @@ class  ProductsListObject: ObservableObject {
         DispatchQueue.main.async {
             self.isLoading = true
         }
-        productListServices.fetchProducts(from: url) { (result) in
+        productListServices.fetchProducts() { (result) in
             DispatchQueue.main.async {
                 self.isLoading = true
             }

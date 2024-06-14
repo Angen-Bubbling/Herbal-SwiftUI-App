@@ -41,7 +41,7 @@ struct CheckOutView: View {
                     Spacer()
                     ForEach(products){product in
                         HStack {
-                            Text(product.title)
+                            Text(product.title ?? "name")
                                 .font(.caption)
                                 .lineLimit(1)
                             Text("\(product.price.format(f: ".2"))$").bold()
@@ -75,8 +75,8 @@ struct CheckOutView: View {
     }
 }
 
-struct CheckOutView_Previews: PreviewProvider {
-    static var previews: some View {
-        CheckOutView(products: Array(Product.sampleProducts[0...2]), price: 500)
-    }
-}
+//struct CheckOutView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CheckOutView(products: Array(Product.sampleProducts[0...2]), price: 500)
+//    }
+//}

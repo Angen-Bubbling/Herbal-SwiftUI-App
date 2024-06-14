@@ -22,25 +22,19 @@ struct LoggedInView: View {
                     Divider()
                     ProfilButtons().environmentObject(users)
                     Spacer()
-                    MapView(region: $region, user: user)
-                        .shadow(color: .darkText.opacity(0.2), radius: 4, x: 1, y: 2)
+                    //MapView(region: $region, user: user)
+                        //.shadow(color: .darkText.opacity(0.2), radius: 4, x: 1, y: 2)
                     Spacer()
                 }
                 .navigationBarBackButtonHidden(false)
                 .navigationBarTitleDisplayMode(.inline)
-                .onAppear{
-                    print("Lattitude : \(user.location.coordinates.latitude)")
-                    print("Longitude : \(user.location.coordinates.longitude)")
-                    region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude:Double( user.location.coordinates.latitude) ?? 0, longitude: Double( user.location.coordinates.longitude) ?? 0), span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
-                }
+//                .onAppear{
+//                    print("Lattitude : \(user.location.coordinates.latitude)")
+//                    print("Longitude : \(user.location.coordinates.longitude)")
+//                    region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude:Double( user.location.coordinates.latitude) ?? 0, longitude: Double( user.location.coordinates.longitude) ?? 0), span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
+//                }
             }.navigationBarHidden(true)
         }
-    }
-}
-
-struct LoggedInView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoggedInView(user: UserAPIResults.sampleUsers.results[0])
     }
 }
 
@@ -62,47 +56,45 @@ struct HeaderLoggedInView: View {
             }
             .padding()
             VStack(alignment: .leading) {
-                Text("\(user.name.first) \(user.name.last)")
+                Text(user.name ?? "name")
                     .font(.title2)
                     .bold()
-                Text("\(user.email)")
+                Text(user.email ?? "email")
                     .font(.caption)
                     .foregroundColor(.secondary)
-                Text("\(user.location.city)")
             }
             Spacer()
         }.padding()
         .onAppear{
-            imageLoader.loadImage(with: URL(string:user.picture.large)!)
+//            imageLoader.loadImage(with: URL(string:user.picture.large)!)
         }
     }
 }
 
-struct MapView: View {
-    @Binding var region: MKCoordinateRegion
-    let user: User
-    @State var annotation: [UserLocation] = [UserLocation(name: "Default", coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0)), UserLocation(name: "Apple", coordinate: CLLocationCoordinate2D(latitude: 37.334722, longitude: -122.008889))]
-    var body: some View {
-        Map(coordinateRegion: $region, annotationItems: annotation){
-            MapAnnotation(coordinate: $0.coordinate, anchorPoint: CGPoint(x: 0.5, y: 0.5)){
-                Image(systemName: "person.circle.fill")
-                    .foregroundColor(.red)
-                    .imageScale(.large)
-            }
-        }
-        .frame(height: 200)
-        .cornerRadius(12)
-        .padding(.horizontal)
-        .onAppear{
-            annotation = [UserLocation(name: user.name.first, coordinate: CLLocationCoordinate2D(latitude: Double(user.location.coordinates.latitude) ?? 0, longitude: Double(user.location.coordinates.longitude) ?? 0))]
-        }
-    }
-}
-
-struct UserLocation: Identifiable {
-    let id = UUID()
-    let name: String
-    let coordinate: CLLocationCoordinate2D
-}
+//struct MapView: View {
+//    @Binding var region: MKCoordinateRegion
+//    let user: User
+//    @State var annotation: [UserLocation] = [UserLocation(name: "Default", coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0)), UserLocation(name: "Apple", coordinate: CLLocationCoordinate2D(latitude: 37.334722, longitude: -122.008889))]
+//    var body: some View {
+//        Map(coordinateRegion: $region, annotationItems: annotation){
+//            MapAnnotation(coordinate: $0.coordinate, anchorPoint: CGPoint(x: 0.5, y: 0.5)){
+//                Image(systemName: "person.circle.fill")
+//                    .foregroundColor(.red)
+//                    .imageScale(.large)
+//            }
+//        }
+//        .frame(height: 200)
+//        .cornerRadius(12)
+//        .padding(.horizontal)
+//        .onAppear{
+//        }
+//    }
+//}
+//
+//struct UserLocation: Identifiable {
+//    let id = UUID()
+//    let name: String
+//    let coordinate: CLLocationCoordinate2D
+//}
 
 

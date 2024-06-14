@@ -13,9 +13,9 @@ struct CartListItem: View {
     @State var quantity: Int = 0
     var body: some View {
         HStack(spacing: 16) {
-            SmallCartListItemImage(imageURL: product.imageURL)
+            //SmallCartListItemImage(imageURL: product.imageURL)
             VStack {
-                Text(product.title)
+                Text(product.title ?? "name")
                     .font(.headline)
                     .lineLimit(2)
                 Text("\((product.price * Double(quantity)).format(f: ".2")) $")
@@ -45,11 +45,11 @@ struct CartListItem: View {
     }
 }
 
-struct CartListItem_Previews: PreviewProvider {
-    static var previews: some View {
-        CartListItem(cart: CartViewModel(), product: Product.sampleProducts[1], quantity: 3)
-    }
-}
+//struct CartListItem_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CartListItem(cart: CartViewModel(), product: Product.sampleProducts[1], quantity: 3)
+//    }
+//}
 
 struct SmallCartListItemImage: View {
     @StateObject private var imageLoader = ImageLoader()

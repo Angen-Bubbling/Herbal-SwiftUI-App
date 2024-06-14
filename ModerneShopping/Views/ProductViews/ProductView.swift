@@ -27,25 +27,19 @@ struct ProductView: View {
                     }
                     Spacer()
                 }.padding()
-                ProductImage(imageURL: product.imageURL).padding(.top)
+                //ProductImage(imageURL: product.imageURL).padding(.top)
                     .environmentObject(cart)
                 ZStack {
                     Color.background.edgesIgnoringSafeArea(.bottom)
                         .cornerRadius(25)
                         .shadow(color: .accentColor.opacity(0.2), radius: 3, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
                     VStack(spacing: 0){
-                        Text(product.title)
+                        Text(product.title ?? "name")
                             .font(.headline)
                             .multilineTextAlignment(.center)
                             .padding(24)
                         Text("\(product.price.format(f: ".02"))$")
                             .font(.headline)
-                        HStack(spacing: 2) {
-                            Text("\(product.formatedRating)").font(.title3)
-                            Text("(\(product.rating.manualCount))").font(.caption)
-                                .foregroundColor(.secondary)
-                                .offset(y: 3)
-                        }
                         .padding(8)
                         Text(product.description).italic()
                             .foregroundColor(.secondary)
@@ -113,13 +107,13 @@ struct ProductImage: View {
         }
     }
 }
-struct ContentView_Previews: PreviewProvider {
-    @Namespace static var namespace
-    static var previews: some View {
-        ProductView(product: Product.sampleProducts[6])
-            .environmentObject(CartViewModel())
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    @Namespace static var namespace
+//    static var previews: some View {
+//        ProductView(product: Product.sampleProducts[6])
+//            .environmentObject(CartViewModel())
+//    }
+//}
 
 //.padding(.leading, product == products.first ? 12 : 0)
 //.padding(.trailing, product == products.last ? 12 : 0)

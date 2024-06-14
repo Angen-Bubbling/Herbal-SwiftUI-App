@@ -14,7 +14,7 @@ struct ProfilView: View {
         ZStack {
             VStack{
                 if let user = userVM.user{
-                    LoggedInView(user: user.results[0])
+                    LoggedInView(user: user)
                         .environmentObject(userVM)
                 } else {
                     LoginView().environmentObject(userVM)

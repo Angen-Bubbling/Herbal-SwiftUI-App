@@ -18,7 +18,7 @@ struct HomeView: View {
                 Color.background.edgesIgnoringSafeArea(.all)
                 ScrollView(.vertical){
                     VStack(alignment: .center) {
-                        Text("Hello \(user.user?.results[0].name.first ?? "")! \n Enjoy your shopping 🥳")
+                        Text("Hello \(user.user?.name ?? "")! \n Enjoy your shopping 🥳")
                             .font(.title).bold()
                             .foregroundColor(.darkText)
                             .multilineTextAlignment(.center)
@@ -55,7 +55,7 @@ struct HomeView: View {
             }.navigationBarTitleDisplayMode(.large)
             .navigationBarItems(
                 leading: NavigationLink(destination:ProfilView().environmentObject(user)){
-                    leadingBarItem(user: user.user?.results[0])
+                    leadingBarItem(user: user.user)
                 },
                 trailing:
                     TrailingBarItem().environmentObject(cart)
@@ -111,13 +111,13 @@ struct leadingBarItem: View {
                     Group{
                         if let user = self.user {
                             if let image = imageLoader.image{
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .clipped()
-                                    .clipShape(Circle())
+//                                Image(uiImage: image)
+//                                    .resizable()
+//                                    .clipped()
+//                                    .clipShape(Circle())
                             }
                             else {
-                                LoadingView(isLoading: imageLoader.isLoading, error: nil, retryAction:{ imageLoader.loadImage(with: URL(string: user.picture.thumbnail)!)})
+//                                LoadingView(isLoading: imageLoader.isLoading, error: nil, retryAction:{ imageLoader.loadImage(with: URL(string: user.picture.thumbnail)!)})
                             }
                         } else {
                             Image(systemName: "person")
@@ -129,7 +129,7 @@ struct leadingBarItem: View {
                 .overlay(Circle().stroke(lineWidth: 2).foregroundColor(Color.darkText))
         }.onAppear{
             if let user = self.user{
-                imageLoader.loadImage(with: URL(string: user.picture.thumbnail)!)
+//                imageLoader.loadImage(with: URL(string: user.picture.thumbnail)!)
             }
         }
     }

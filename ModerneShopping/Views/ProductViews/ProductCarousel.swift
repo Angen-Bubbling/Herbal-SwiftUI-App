@@ -58,9 +58,9 @@ struct ProductCarousel: View {
     }
 }
 
-struct ProductCarousel_Previews: PreviewProvider {
-    static var previews: some View {
-        ProductCarousel(products: Product.sampleProducts)
-    }
-}
-
+//struct ProductCarousel_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProductCarousel(products: Product.sampleProducts)
+//    }
+//}
+//

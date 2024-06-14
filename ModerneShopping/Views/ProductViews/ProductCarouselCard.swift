@@ -12,21 +12,14 @@ struct ProductCarouselCard: View {
     var body: some View {
         ZStack{
             HStack {
-                ProductCarouselImage(imageURL: product.imageURL)
+                //ProductCarouselImage(imageURL: product.imageURL)
                 VStack(alignment: .leading){
-                    Text(product.title)
+                    Text(product.title ?? "name")
                         .font(.subheadline)
                         .lineLimit(3)
                     Text("\(product.price.format(f: ".2"))$")
                         .bold()
                         .padding(4)
-                    HStack(spacing: 2) {
-                        Text("\(product.formatedRating)")
-                            .font(.footnote)
-                        Text("(\(product.rating.manualCount))")
-                            .font(.caption)
-                            .offset(y:2)
-                    }
                 }.foregroundColor(.darkText)
                 Spacer()
             }
@@ -38,11 +31,11 @@ struct ProductCarouselCard: View {
     }
 }
 
-struct ProductCarouselCard_Previews: PreviewProvider {
-    static var previews: some View {
-        ProductCarouselCard(product: Product.sampleProducts[2])
-    }
-}
+//struct ProductCarouselCard_Previews: PreviewProvider {
+//    static var previews: some View {
+//        //ProductCarouselCard(product: Product.sampleProducts[2])
+//    }
+//}
 
 struct ProductCarouselImage: View {
     @StateObject private var imageLoader = ImageLoader()

@@ -44,8 +44,8 @@ struct CartListView: View {
     }
 }
 
-struct CartList_Previews: PreviewProvider {
-    static var previews: some View {
-        CartListView(cart: CartViewModel(), products: [Product.sampleProducts[0]: 1], showDelete: .constant(true))
-    }
-}
+//struct CartList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CartListView(cart: CartViewModel(), products: [Product.sampleProducts[0]: 1], showDelete: .constant(true))
+//    }
+//}

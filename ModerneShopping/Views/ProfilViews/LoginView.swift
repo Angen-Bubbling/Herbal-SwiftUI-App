@@ -13,6 +13,9 @@ struct LoginView: View {
     @State private var isPasswordValid: Bool? = nil
     @State private var showPassword: Bool = false
     @State private var showSheet: Bool = false
+    @State private var email = ""
+    @State private var username = ""
+    @State private var password = ""
     var body: some View {
         ZStack{
             Color.background.edgesIgnoringSafeArea(.all)
@@ -62,13 +65,12 @@ struct LoginView: View {
                         Spacer()
                     }
                     Button(action: {
-                        user.validateName(name: user.login)
-                        user.validatePassword(name: user.password)
+                        user.validateNameAndPassword(username: user.login,password:user.password)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1){
                             if user.isNameValid == true &&
                                 user.isPasswordValid == true {
                                 withAnimation{
-                                    user.loadUser()
+                                    //成功登陆
                                 }
                             } else {
                                 withAnimation{
@@ -100,7 +102,48 @@ struct LoginView: View {
                 Spacer()
             }.padding()
             .sheet(isPresented: $showSheet){
-                Text("Create an account or forgot password")
+                VStack {
+                    Text("Create an account")
+                        .font(.headline)
+                        .padding(.bottom, 20)
+                    
+                    TextField("Email", text: $email)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(8)
+                        .padding(.bottom, 10)
+                    
+                    TextField("Username", text: $username)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(8)
+                        .padding(.bottom, 10)
+                    
+                    TextField("Password", text: $password)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(8)
+                        .padding(.bottom, 10)
+                    
+                    Button(action: {
+                                user.createUser(email: email, username: username, password: password)
+                                print("Creating user with email: \(email) and username: \(username)")
+                                showSheet = false
+                                    })
+                                    {
+                                        Text("Create User")
+                                            .font(.headline)
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .background(Color.blue)
+                                            .cornerRadius(8)
+                                    }
+                                    
+                    Spacer()
+                
+                
+                }
+                .padding()
             }
         }
     }
@@ -110,7 +153,6 @@ struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
             .environmentObject(UserViewModel())
-        
     }
 }
 

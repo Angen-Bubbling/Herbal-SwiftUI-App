@@ -45,11 +45,11 @@ struct ProductList: View {
     }
 }
 
-struct ProductList_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView  {
-            ProductList(products: Product.sampleProducts).environmentObject(CartViewModel())
-        }
-    }
-}
-
+//struct ProductList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationView  {
+//            ProductList(products: Product.sampleProducts).environmentObject(CartViewModel())
+//        }
+//    }
+//}
+//

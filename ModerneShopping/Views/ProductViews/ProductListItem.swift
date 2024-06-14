@@ -11,8 +11,8 @@ struct ProductListItem: View {
     let product: Product
     var body: some View {
         VStack {
-            SmallProductImage(imageURL: product.imageURL)
-            Text(product.title)
+            //SmallProductImage(imageURL: product.imageURL)
+            Text(product.title ?? "name")
                 .foregroundColor(.darkText)
                 .bold()
                 .lineLimit(2)
@@ -20,22 +20,15 @@ struct ProductListItem: View {
                 .padding(.horizontal)
             Text("\(product.price.format(f: ".2"))$").bold()
                 .foregroundColor(.darkText)
-            HStack(spacing: 2) {
-                Text("\(product.formatedRating)").font(.title3)
-                    .foregroundColor(.darkText)
-                Text("(\(product.rating.manualCount))").font(.caption2)
-                    .foregroundColor(.secondary)
-                    .offset(y: 3)
-            }
         }.padding(8)
     }
 }
 
-struct ProductListItem_Previews: PreviewProvider {
-    static var previews: some View {
-        ProductListItem(product: Product.sampleProducts[0])
-    }
-}
+//struct ProductListItem_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProductListItem(product: Product.sampleProducts[0])
+//    }
+//}
 
 struct SmallProductImage: View {
     @StateObject private var imageLoader = ImageLoader()
