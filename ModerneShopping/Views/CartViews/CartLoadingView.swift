@@ -21,9 +21,3 @@ struct CartLoadingView: View {
     }
 }
 
-struct CartLoadingView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoadingView(isLoading: true, error: nil, retryAction: nil)
-    }
-}
-

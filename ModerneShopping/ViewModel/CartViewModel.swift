@@ -58,4 +58,29 @@ class  CartViewModel: ObservableObject {
     func removeFromCart(toRemove: Product){
         cartProductDic.removeValue(forKey: toRemove)
     }
+    
+    func emptyAndStoreCart(){
+        saveCartData()
+        
+        withAnimation {
+            cartProduct.removeAll()
+            cartProductDic.removeAll()
+            totalPrice = 0
+        }
+    }
+    
+    private func saveCartData() {
+           let context = CoreDataStack.shared.context
+
+           for (product, quantity) in cartProductDic {
+               let history = History(context: context)
+               history.paytime = Date()
+               history.id = Int64(UUID().hashValue)
+               history.name = product.title
+               history.amount = Int32(quantity)
+               history.price = product.price
+           }
+
+           CoreDataStack.shared.saveContext()
+       }
 }

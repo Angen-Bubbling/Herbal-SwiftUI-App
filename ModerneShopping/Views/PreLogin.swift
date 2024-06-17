@@ -7,33 +7,25 @@
 
 import SwiftUI
 
-struct ProfilView: View {
-    @EnvironmentObject var userVM: UserViewModel
+struct PreLogin: View {
+    @StateObject var userVM = UserViewModel()
     @StateObject var imageLoader = ImageLoader()
     var body: some View {
         ZStack {
             VStack{
                 if let user = userVM.user{
-                    LoggedInView(user: user)
-                        .environmentObject(userVM)
+                    MainView(user_info:user).environmentObject(userVM)
                 } else {
                     LoginView().environmentObject(userVM)
                 }
             }
-            if userVM.isLoading{
-                ZStack{
-                    Color.background.edgesIgnoringSafeArea(.all)
-                    ProductLoading()
-                        .frame(width: 80, height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                }
             }
         }
-    }
 }
 
 struct ProfilView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfilView()
+        PreLogin()
             .environmentObject(UserViewModel())
     }
 }

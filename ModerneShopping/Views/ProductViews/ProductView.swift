@@ -10,7 +10,6 @@ import SwiftUI
 struct ProductView: View {
     @EnvironmentObject var cart: CartViewModel
     @Environment(\.presentationMode) var presentation
-    // deprecated in iOS 15 we should use @Environment(.\dismiss) var dismiss
     @State private var quantity: Int = 1
     let product: Product
     var body: some View {
@@ -27,24 +26,36 @@ struct ProductView: View {
                     }
                     Spacer()
                 }.padding()
-                //ProductImage(imageURL: product.imageURL).padding(.top)
+                ProductImage(imageName: product.title).padding(.top)
                     .environmentObject(cart)
                 ZStack {
                     Color.background.edgesIgnoringSafeArea(.bottom)
                         .cornerRadius(25)
                         .shadow(color: .accentColor.opacity(0.2), radius: 3, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
                     VStack(spacing: 0){
-                        Text(product.title ?? "name")
+                        Text(product.title)
                             .font(.headline)
                             .multilineTextAlignment(.center)
-                            .padding(24)
-                        Text("\(product.price.format(f: ".02"))$")
+                            .padding(.top,24)
+                            .padding(.bottom,4)
+                        Text("\(product.price.format(f: ".02"))¥/kg")
                             .font(.headline)
-                        .padding(8)
-                        Text(product.description).italic()
-                            .foregroundColor(.secondary)
-                            .padding()
-                            .multilineTextAlignment(.center)
+                        .padding(4)
+                        Text("库存：\(product.number)kg")
+                            .font(.headline)
+                        .padding(4)
+                        HStack(spacing: 2) {
+                            Text("\(product.formatedRating)").font(.title3)
+                            Text("(\(product.manualCount))").font(.caption)
+                                .foregroundColor(.secondary)
+                                .offset(y: 3)
+                        }
+                        .padding(4)
+                        ScrollView{
+                            Text(product.discription)
+                                .padding()
+                                .multilineTextAlignment(.center)
+                        }
                         Spacer()
                         VStack(spacing: 0) {
                             Text("Quantity").font(.headline)
@@ -74,21 +85,20 @@ struct ProductView: View {
 
 struct ProductImage: View {
     @EnvironmentObject var cart: CartViewModel
-    @StateObject private var imageLoader = ImageLoader()
-    let imageURL: URL
+    let imageName: String
+    
     var body: some View {
-        ZStack{
+        ZStack {
             Rectangle()
                 .fill(Color.white)
-                .frame(width: 260, height: 300, alignment: .center)
+                .frame(width: 360, height: 200, alignment: .center)
                 .cornerRadius(12)
                 .overlay(
                     ZStack {
-                        ProgressView()
-                        if imageLoader.image != nil {
+                        if let image = UIImage(named: imageName) {
                             HStack {
                                 Spacer()
-                                Image(uiImage: imageLoader.image!)
+                                Image(uiImage: image)
                                     .resizable()
                                     .compositingGroup()
                                     .clipped(antialiased: true)
@@ -97,23 +107,12 @@ struct ProductImage: View {
                                     .padding()
                                 Spacer()
                             }
+                        } else {
+                            ProgressView()
                         }
                     }
                 )
         }
         .cornerRadius(12)
-        .onAppear {
-            imageLoader.loadImage(with: imageURL)
-        }
     }
 }
-//struct ContentView_Previews: PreviewProvider {
-//    @Namespace static var namespace
-//    static var previews: some View {
-//        ProductView(product: Product.sampleProducts[6])
-//            .environmentObject(CartViewModel())
-//    }
-//}
-
-//.padding(.leading, product == products.first ? 12 : 0)
-//.padding(.trailing, product == products.last ? 12 : 0)

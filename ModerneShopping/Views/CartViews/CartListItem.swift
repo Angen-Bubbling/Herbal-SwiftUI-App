@@ -13,16 +13,16 @@ struct CartListItem: View {
     @State var quantity: Int = 0
     var body: some View {
         HStack(spacing: 16) {
-            //SmallCartListItemImage(imageURL: product.imageURL)
+            SmallCartListItemImage(imageName: product.title)
             VStack {
-                Text(product.title ?? "name")
+                Text(product.title)
                     .font(.headline)
                     .lineLimit(2)
-                Text("\((product.price * Double(quantity)).format(f: ".2")) $")
+                Text("\((product.price * Double(quantity)).format(f: ".2")) ¥")
             }
             Spacer()
             Picker(selection: $quantity, label: Text("Picker"), content: {
-                ForEach(1...10, id:\.self){quantity in
+                ForEach(1...100, id:\.self){quantity in
                     Text("\(quantity)")
                         .tag(quantity)
                 }.onChange(of: quantity, perform: { value in
@@ -45,15 +45,9 @@ struct CartListItem: View {
     }
 }
 
-//struct CartListItem_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CartListItem(cart: CartViewModel(), product: Product.sampleProducts[1], quantity: 3)
-//    }
-//}
-
 struct SmallCartListItemImage: View {
-    @StateObject private var imageLoader = ImageLoader()
-    let imageURL: URL
+    let imageName: String
+    
     var body: some View {
         ZStack{
             Rectangle()
@@ -63,23 +57,19 @@ struct SmallCartListItemImage: View {
                 .overlay(
                     ZStack {
                         ProgressView()
-                        if imageLoader.image != nil {
-                            HStack {
-                                Spacer()
-                                Image(uiImage: imageLoader.image!)
-                                    .resizable()
-                                    .compositingGroup()
-                                    .aspectRatio(contentMode: .fit)
-                                Spacer()
-                            }
+                        HStack {
+                            Spacer()
+                            Image(imageName)
+                                .resizable()
+                                .compositingGroup()
+                                .aspectRatio(contentMode: .fit)
+                            Spacer()
                         }
                     }.padding()
                 )
         }
         .cornerRadius(12)
         .shadow(color: .gray, radius: 2, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
-        .onAppear {
-            imageLoader.loadImage(with: imageURL)
-        }
     }
 }
+

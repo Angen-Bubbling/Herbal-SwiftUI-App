@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  ModerneShopping
 //
-//  Created by 张真瑜 on 2024/6/14.
+//  Created by 张真瑜 on 2024/6/15.
 //
 //
 
@@ -16,8 +16,8 @@ extension User {
         return NSFetchRequest<User>(entityName: "User")
     }
 
-    @NSManaged public var name: String?
     @NSManaged public var email: String?
+    @NSManaged public var name: String?
     @NSManaged public var password: String?
 
 }

@@ -12,31 +12,18 @@ class  ProductsListObject: ObservableObject {
     @Published var isLoading = false
     @Published var error: NSError?
     
-    var featuredProduct : [Product] {
-        var fProducts: [Product] = []
-        if let products = self.products  {
-            if products.count >= 4 {
-            fProducts = products[0...3].shuffled()
-            }
-        }
-        return fProducts
-    }
-    
-    /// Getting the api services singleton
     private let productListServices: DataBaseServiceProtocol
     
     init(productServices: DataBaseServiceProtocol = DatabaseService.shared){
         self.productListServices = productServices
     }
     
-    /// Call the api services to get the product needed
-    /// - Parameter url: category of products
-    func loadProducts(with url: ProductListEndpoint){
+    func loadProducts(with ProductCategory: ProductListEndpoint){
         self.products = nil
         DispatchQueue.main.async {
             self.isLoading = true
         }
-        productListServices.fetchProducts() { (result) in
+        productListServices.fetchProductsByCategory(category: ProductCategory.description) { (result) in
             DispatchQueue.main.async {
                 self.isLoading = true
             }

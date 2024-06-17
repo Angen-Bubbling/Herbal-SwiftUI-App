@@ -37,10 +37,7 @@ struct ProfilButtons: View {
                 .cornerRadius(12)
                 .shadow(color: .accentColor.opacity(0.1), radius: 2, x: 0.5, y: 1)
             }
-            NavigationLink(destination: ZStack {
-                Color.background.edgesIgnoringSafeArea(.all)
-                Text("Orders")
-            }){
+            NavigationLink(destination: HistoryView()){
                 HStack {
                     Text("Orders")
                     Image(systemName: "bag.circle")

@@ -25,11 +25,9 @@ struct CartView: View {
             VStack{
                 if !productsDic.isEmpty{
                     HStack{
-                        Text("Cart")
+                        Text("购物车")
                             .font(.title2).bold()
                         Spacer()
-                        trailingItem
-                            
                     }.padding()
                 }
                 if cartProducts.cartProductDic.isEmpty {
@@ -37,13 +35,14 @@ struct CartView: View {
                 } else {
                     CartListView(cart: cartProducts, products: cartProducts.cartProductDic, showDelete: $showDelete)
                 }
-                Text("Total: \(cartProducts.totalPrice.format(f: ".2"))$")
+                Text("总计：\(cartProducts.totalPrice.format(f: ".2"))¥")
+                    .padding(.top,15)
                 Button(action: {withAnimation{cartProducts.showShowcaseSheet.toggle()}}, label: {
                     HStack {
-                        Text("Check out").bold()
+                        Text("付款").bold()
                         Image(systemName: "creditcard")
                     }.padding()
-                    .foregroundColor(.tertiary)
+                        .foregroundColor(.tertiary)
                 })
                 .background(Color.accentColor)
                 .cornerRadius(12)
@@ -53,24 +52,19 @@ struct CartView: View {
                 cartProducts.calculateTotalPrice()
             })
         }.accentColor(.darkText)
-        .overlay(
-            Group {
-                if cartProducts.showShowcaseSheet{
-                    CheckOutView(products: productsDic, price: cartProducts.totalPrice).environmentObject(cartProducts)
-                } else {
-                    EmptyView()
+            .overlay(
+                Group {
+                    if cartProducts.showShowcaseSheet{
+                        CheckOutView(products: productsDic, price: cartProducts.totalPrice).environmentObject(cartProducts)
+                    } else {
+                        EmptyView()
+                    }
                 }
+            )
+            .onAppear{
+                showDelete = false
+                cartProducts.calculateTotalPrice()
             }
-        )
-        .onAppear{
-            showDelete = false
-            cartProducts.calculateTotalPrice()
-        }
-    }
-    var trailingItem: some View {
-        Button(action:{withAnimation {showDelete.toggle()}}){
-            Image(systemName:"slider.horizontal.3")
-        }.accentColor(.darkText)
     }
 }
 

@@ -11,54 +11,55 @@ struct ProductListItem: View {
     let product: Product
     var body: some View {
         VStack {
-            //SmallProductImage(imageURL: product.imageURL)
-            Text(product.title ?? "name")
+            SmallProductImage(imageName: product.title)
+            Text(product.title)
                 .foregroundColor(.darkText)
                 .bold()
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
-            Text("\(product.price.format(f: ".2"))$").bold()
+            Text("\(product.price.format(f: ".2"))¥/kg").bold()
                 .foregroundColor(.darkText)
+            HStack(spacing: 2) {
+                Text("\(product.formatedRating)").font(.title3)
+                    .foregroundColor(.darkText)
+                Text("(\(product.manualCount))").font(.caption2)
+                    .foregroundColor(.secondary)
+                    .offset(y: 3)
+                }
         }.padding(8)
     }
 }
 
-//struct ProductListItem_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProductListItem(product: Product.sampleProducts[0])
-//    }
-//}
 
 struct SmallProductImage: View {
-    @StateObject private var imageLoader = ImageLoader()
-    let imageURL: URL
+    let imageName: String
+    
     var body: some View {
-        ZStack{
+        ZStack {
             Rectangle()
                 .fill(Color.white)
                 .frame(width: 170, height: 190, alignment: .center)
                 .cornerRadius(12)
                 .overlay(
                     ZStack {
-                        ProgressView()
-                        if imageLoader.image != nil {
+                        if let image = UIImage(named: imageName) {
                             HStack {
                                 Spacer()
-                                Image(uiImage: imageLoader.image!)
+                                Image(uiImage: image)
                                     .resizable()
                                     .compositingGroup()
                                     .aspectRatio(contentMode: .fit)
                                 Spacer()
                             }
+                        } else {
+                            ProgressView()
                         }
                     }.padding()
                 )
         }
         .cornerRadius(12)
-        .shadow(color: .gray, radius: 2, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/)
-        .onAppear {
-            imageLoader.loadImage(with: imageURL)
-        }
+        .shadow(color: .gray, radius: 2, x: 0.0, y: 0.0)
     }
 }
+

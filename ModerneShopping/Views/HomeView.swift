@@ -30,14 +30,6 @@ struct HomeView: View {
                                 }
                             })
                         if productsList.products != nil {
-                            ProductCarousel(products: productsList.featuredProduct)
-                                .environmentObject(cart)
-                                .padding(.top)
-                        } else {
-                            LoadingView(isLoading: productsList.isLoading, error: productsList.error){ productsList.loadProducts(with: pickedCategory)
-                            }
-                        }
-                        if productsList.products != nil {
                             ProductList(products: productsList.products!)
                                 .environmentObject(cart)
                         } else {
@@ -54,9 +46,9 @@ struct HomeView: View {
                 }
             }.navigationBarTitleDisplayMode(.large)
             .navigationBarItems(
-                leading: NavigationLink(destination:ProfilView().environmentObject(user)){
-                    leadingBarItem(user: user.user)
-                },
+                leading:
+                    leadingBarItem()
+                ,
                 trailing:
                     TrailingBarItem().environmentObject(cart)
             )
@@ -100,38 +92,13 @@ struct TrailingBarItem: View {
 }
 
 struct leadingBarItem: View {
-    @StateObject var imageLoader = ImageLoader()
-    let user: User?
     var body: some View {
-        ZStack {
-            Circle()
-                .fill(Color.secondaryBackground)
-                .frame(width: 40, height: 40)
-                .overlay(
-                    Group{
-                        if let user = self.user {
-                            if let image = imageLoader.image{
-//                                Image(uiImage: image)
-//                                    .resizable()
-//                                    .clipped()
-//                                    .clipShape(Circle())
-                            }
-                            else {
-//                                LoadingView(isLoading: imageLoader.isLoading, error: nil, retryAction:{ imageLoader.loadImage(with: URL(string: user.picture.thumbnail)!)})
-                            }
-                        } else {
-                            Image(systemName: "person")
-                                .foregroundColor(.darkText)
-                                .imageScale(.large)
-                        }
-                    }
-                )
-                .overlay(Circle().stroke(lineWidth: 2).foregroundColor(Color.darkText))
-        }.onAppear{
-            if let user = self.user{
-//                imageLoader.loadImage(with: URL(string: user.picture.thumbnail)!)
-            }
+        NavigationLink(destination: SearchView()) {
+            Image(systemName: "magnifyingglass")
+                .foregroundColor(.darkText)
+                .imageScale(.large)
+                .padding()
         }
+        .navigationBarHidden(true)
     }
-    
 }
