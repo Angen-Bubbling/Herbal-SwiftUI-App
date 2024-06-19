@@ -177,5 +177,10 @@ class DatabaseService : DataBaseServiceProtocol {
             print("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
+    
+    func fetchProductsByHistory(for history: History) -> [Product] {
+        let products = history.productArray
+        return products
+    }
 
 }

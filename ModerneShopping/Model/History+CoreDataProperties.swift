@@ -16,11 +16,32 @@ extension History {
         return NSFetchRequest<History>(entityName: "History")
     }
 
-    @NSManaged public var paytime: Date
     @NSManaged public var id: Int64
-    @NSManaged public var name: String
-    @NSManaged public var amount: Int32
-    @NSManaged public var price: Double
+    @NSManaged public var paytime: Date
+    @NSManaged public var totalprice: Double
+    @NSManaged public var product: NSSet?
+    
+    public var productArray: [Product] {
+           let set = product as? Set<Product> ?? []
+           return set.sorted { $0.title < $1.title }
+       }
+
+}
+
+// MARK: Generated accessors for product
+extension History {
+
+    @objc(addProductObject:)
+    @NSManaged public func addToProduct(_ value: Product)
+
+    @objc(removeProductObject:)
+    @NSManaged public func removeFromProduct(_ value: Product)
+
+    @objc(addProduct:)
+    @NSManaged public func addToProduct(_ values: NSSet)
+
+    @objc(removeProduct:)
+    @NSManaged public func removeFromProduct(_ values: NSSet)
 
 }
 

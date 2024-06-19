@@ -7,40 +7,42 @@
 
 import SwiftUI
 
-struct HistoryRecord: Identifiable {
-    let id = UUID()
-    let date: String
-    let content: String
-}
-
-struct HistoryDetailView: View {
-    var record: HistoryRecord
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(record.date)
-                .font(.largeTitle)
-            Text(record.content)
-                .font(.body)
-        }
-        .padding()
-    }
-}
 
 struct HistoryView: View {
     @StateObject var history =  HistoryViewModel()
-    @State private var selectedRecord: HistoryRecord?
+    @State private var selectedRecord: HistoryListItem?
     
     var body: some View {
-        List(history.historyRecords) { record in
+        List(history.historyList) { record in
             Button(action: {
                 selectedRecord = record
             }) {
                 VStack(alignment: .leading) {
-                    Text(record.date)
+                    Text("购买时间: \(record.date, formatter: dateFormatter)")
                         .font(.headline)
-                    Text(record.content)
+                    Text("总价: \(record.totalPrice, specifier: "%.2f")")
                         .font(.subheadline)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack {
+                            ForEach(record.productList, id: \.self) { product in
+                                if let image = UIImage(named:product.title){
+                                    Image(uiImage:image)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 100, height: 100)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .stroke(Color.gray, lineWidth: 1)
+                                        )
+                                        .shadow(radius: 5)
+                                        .padding(2)
+                                }
+                            }
+                        }
+                    }
+                    .frame(height: 100) // Set a fixed height for the scroll view
                 }
                 .padding(.vertical, 4)
             }
@@ -50,7 +52,16 @@ struct HistoryView: View {
         }
         .navigationTitle("购买记录")
     }
+    
 }
+
+private let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .short
+    formatter.timeStyle = .medium
+    return formatter
+}()
+
 
 #Preview {
     HistoryView()

@@ -2,7 +2,7 @@
 //  Product+CoreDataProperties.swift
 //  ModerneShopping
 //
-//  Created by 张真瑜 on 2024/6/15.
+//  Created by 张真瑜 on 2024/6/18.
 //
 //
 
@@ -16,13 +16,14 @@ extension Product {
         return NSFetchRequest<Product>(entityName: "Product")
     }
 
-    @NSManaged public var discription: String
-    @NSManaged public var price: Double
-    @NSManaged public var title: String
     @NSManaged public var category: String
+    @NSManaged public var discription: String
     @NSManaged public var number: Int32
+    @NSManaged public var price: Double
     @NSManaged public var rate: Double
-    
+    @NSManaged public var title: String
+    @NSManaged public var history: History?
+
 }
 
 extension Product : Identifiable {

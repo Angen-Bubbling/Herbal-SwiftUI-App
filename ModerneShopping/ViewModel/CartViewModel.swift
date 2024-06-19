@@ -42,6 +42,7 @@ class  CartViewModel: ObservableObject {
             }
         }
     }
+    
     func changeQuantity(product: Product,quantity: Int){
         cartProductDic[product] = quantity
     }
@@ -70,17 +71,17 @@ class  CartViewModel: ObservableObject {
     }
     
     private func saveCartData() {
-           let context = CoreDataStack.shared.context
-
-           for (product, quantity) in cartProductDic {
-               let history = History(context: context)
-               history.paytime = Date()
-               history.id = Int64(UUID().hashValue)
-               history.name = product.title
-               history.amount = Int32(quantity)
-               history.price = product.price
+            let context = CoreDataStack.shared.context
+            let history = History(context: context)
+            history.paytime = Date()
+            history.id = Int64(UUID().hashValue)
+            history.totalprice = totalPrice
+            for (product, quantity) in cartProductDic {
+                product.number = Int32(quantity)
+                history.addToProduct(product)
            }
 
+        
            CoreDataStack.shared.saveContext()
        }
 }
