@@ -40,9 +40,3 @@ struct HistoryDetailView: View {
     }
 }
 
-private let dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()

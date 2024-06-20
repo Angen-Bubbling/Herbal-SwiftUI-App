@@ -64,10 +64,8 @@ class  UserViewModel: ObservableObject {
         isNameValid = nil
         isPasswordValid = nil
         // Delaying the logout to see the Loading animation
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-            self.user = nil
-            self.isLoading = false
-        }
+        self.user = nil
+        self.isLoading = false
     }
     
     func validateNameAndPassword(username: String, password: String) {

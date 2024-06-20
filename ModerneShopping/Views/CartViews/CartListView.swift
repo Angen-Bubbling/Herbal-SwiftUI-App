@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CartListView: View {
     @ObservedObject var cart: CartViewModel
-    let products: [Product: Int]
+    let products: [Product: Int] 
     @Binding var showDelete: Bool
     
     var body: some View {

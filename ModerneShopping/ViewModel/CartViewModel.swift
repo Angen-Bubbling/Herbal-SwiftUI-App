@@ -77,8 +77,12 @@ class  CartViewModel: ObservableObject {
             history.id = Int64(UUID().hashValue)
             history.totalprice = totalPrice
             for (product, quantity) in cartProductDic {
-                product.number = Int32(quantity)
+                let productQuantity = ProductQuantity(context: context)
+                productQuantity.productName = product.title
+                productQuantity.quantity = Int64(quantity)
+                productQuantity.history = history
                 history.addToProduct(product)
+                history.addToQuantity(productQuantity)
            }
 
         

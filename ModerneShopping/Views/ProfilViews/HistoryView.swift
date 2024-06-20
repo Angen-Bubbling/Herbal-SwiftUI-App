@@ -55,13 +55,12 @@ struct HistoryView: View {
     
 }
 
-private let dateFormatter: DateFormatter = {
+public let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.dateStyle = .short
+    formatter.dateStyle = .medium
     formatter.timeStyle = .medium
     return formatter
 }()
-
 
 #Preview {
     HistoryView()

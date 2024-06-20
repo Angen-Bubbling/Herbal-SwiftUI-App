@@ -2,7 +2,7 @@
 //  Product+CoreDataProperties.swift
 //  ModerneShopping
 //
-//  Created by 张真瑜 on 2024/6/18.
+//  Created by 张真瑜 on 2024/6/20.
 //
 //
 
@@ -22,7 +22,24 @@ extension Product {
     @NSManaged public var price: Double
     @NSManaged public var rate: Double
     @NSManaged public var title: String
-    @NSManaged public var history: History?
+    @NSManaged public var history: NSSet?
+
+}
+
+// MARK: Generated accessors for history
+extension Product {
+
+    @objc(addHistoryObject:)
+    @NSManaged public func addToHistory(_ value: History)
+
+    @objc(removeHistoryObject:)
+    @NSManaged public func removeFromHistory(_ value: History)
+
+    @objc(addHistory:)
+    @NSManaged public func addToHistory(_ values: NSSet)
+
+    @objc(removeHistory:)
+    @NSManaged public func removeFromHistory(_ values: NSSet)
 
 }
 

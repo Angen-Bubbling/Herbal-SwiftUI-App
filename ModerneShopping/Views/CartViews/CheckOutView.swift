@@ -46,9 +46,11 @@ struct CheckOutView: View {
                                 Text(product.title)
                                     .font(.subheadline)
                                     .lineLimit(1)
-                                Text("\(product.price.format(f: ".2"))¥")
+                                Text("\((product.price).format(f: ".2"))¥")
                                     .bold()
                                 Spacer()
+                                Text("\(cart.cartProductDic[product] ?? 0)kg")
+                                    .bold()
                             }
                             .padding(.horizontal)
                             .padding(.vertical, 8)
