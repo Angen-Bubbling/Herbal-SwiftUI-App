@@ -48,16 +48,6 @@ struct LoginView: View {
                             }
                         }
                     }
-                    HStack{
-                        Button(action:{withAnimation{
-                            showSheet.toggle()
-                        }}){
-                            Text("忘记密码？")
-                                .font(.subheadline).bold()
-                        }
-                        .padding(8)
-                        Spacer()
-                    }
                     Button(action: {
                         user.validateNameAndPassword(username: user.login,password:user.password)
                             if user.isNameValid == true &&
