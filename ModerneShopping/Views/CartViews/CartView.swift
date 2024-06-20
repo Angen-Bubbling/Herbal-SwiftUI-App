@@ -1,9 +1,3 @@
-//
-//  CartView.swift
-//  ModerneShopping
-//
-//  Created by Djallil Elkebir on 2021-09-02.
-//
 
 import SwiftUI
 
@@ -11,8 +5,7 @@ struct CartView: View {
     @EnvironmentObject var user: UserViewModel
     init(cartProducts: CartViewModel){
         self.cartProducts = cartProducts
-        // using UIKit list styling (iOS 15 fixes that)
-        UITableView.appearance().separatorStyle = .none
+                UITableView.appearance().separatorStyle = .none
         UITableViewCell.appearance().backgroundColor = UIColor(Color.background)
         UITableView.appearance().backgroundColor = UIColor(Color.background)
     }

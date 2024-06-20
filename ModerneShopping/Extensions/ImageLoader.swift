@@ -1,17 +1,10 @@
-//
-//  ImageLoader.swift
-//  ModerneShopping
-//
-//  Created by Djallil Elkebir on 2021-09-01.
-//
 
 import SwiftUI
 import UIKit
 
 private let _imageCache = NSCache<AnyObject, AnyObject>()
 
-/// Load an image and cache it
-class ImageLoader: ObservableObject {
+/class ImageLoader: ObservableObject {
     @Published var image: UIImage?
     @Published var isLoading = false
     

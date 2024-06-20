@@ -1,10 +1,3 @@
-//
-//  LoggedInView.swift
-//  ModerneShopping
-//
-//  Created by Djallil Elkebir on 2021-09-06.
-//
-
 import SwiftUI
 import MapKit
 
@@ -58,7 +51,6 @@ struct HeaderLoggedInView: View {
             Spacer()
         }.padding()
         .onAppear{
-//            imageLoader.loadImage(with: URL(string:user.picture.large)!)
         }
     }
 }

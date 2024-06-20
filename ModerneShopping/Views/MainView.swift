@@ -1,10 +1,3 @@
-//
-//  MainView.swift
-//  ModerneShopping
-//
-//  Created by Djallil Elkebir on 2021-09-02.
-//
-
 import SwiftUI
 
 struct MainView: View {

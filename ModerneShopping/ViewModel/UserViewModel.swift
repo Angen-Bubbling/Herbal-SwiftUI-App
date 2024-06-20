@@ -1,9 +1,3 @@
-//
-//  UserViewModel.swift
-//  ModerneShopping
-//
-//  Created by Djallil Elkebir on 2021-09-06.
-//
 
 import SwiftUI
 
@@ -23,48 +17,18 @@ class  UserViewModel: ObservableObject {
         self.userServices = userServices
     }
     
-    /// Calling the API Service VM Getting a user through random generated user API
-//    func loadUser(){
-//        // setting the user to nil to load a fresh one
-//        self.user = nil
-//        // showing the spining loading view, using the main thread for UI Work
-//        DispatchQueue.main.async {
-//            self.isLoading = true
-//        }
-//        // calling the api function and assigning the user if found
-//        userServices.fetchUser { (result) in
-//            DispatchQueue.main.async {
-//                self.isLoading = true
-//            }
-//            switch result {
-//            case .success(let response):
-//                DispatchQueue.main.async {
-//                    self.user? = response[0]
-//                    //self.isLoading = false
-//                }
-//            case .failure(let error):
-//                DispatchQueue.main.async {
-//                    print(error)
-//                    self.error = error as NSError
-//                }
-//            }
-//        }
-//    }
-//    
-    func createUser(email: String, username: String, password: String) {
+    /    func createUser(email: String, username: String, password: String) {
         print("Creating user with email: \(email), username: \(username), and password: \(password)")
         self.login = username
         self.password = password
         userServices.addUser(name: username, email: email, password: password)
     }
     
-    /// signing out and reseting the login view
-    func signout(){
+    /    func signout(){
         isLoading = true
         isNameValid = nil
         isPasswordValid = nil
-        // Delaying the logout to see the Loading animation
-        self.user = nil
+                self.user = nil
         self.isLoading = false
     }
     
@@ -94,33 +58,7 @@ class  UserViewModel: ObservableObject {
 
 
 //func validateName(name: String){
-//    guard name.count > 5 && name.count < 24 else {
-//        withAnimation{
-//            isNameValid = false
-//        }
-//        return
-//    }
-//    guard name.contains("@") else {
-//        withAnimation{
-//            isNameValid = false
-//        }
-//        return
-//    }
-//    withAnimation{
-//        isNameValid = true
-//    }
 //}
-///// validate if the password respect our conditions
-///// - Parameter name: password
-//func validatePassword(name: String){
-//    guard name.count >= 5 && name.count < 24 else {
-//        withAnimation{
-//            isPasswordValid = false
-//        }
-//        return
-//    }
-//    withAnimation{
-//        isPasswordValid = true
-//    }
+////////func validatePassword(name: String){
 //}
 //}

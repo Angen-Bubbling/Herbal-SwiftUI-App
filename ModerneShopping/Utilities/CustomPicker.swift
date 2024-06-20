@@ -1,9 +1,3 @@
-//
-//  CustomPicker.swift
-//  ModerneShopping
-//
-//  Created by Djallil Elkebir on 2021-09-02.
-//
 
 import SwiftUI
 
@@ -13,8 +7,7 @@ struct CustomPicker: View {
     
     var body: some View {
         VStack {
-            // Header with selected category and toggle button
-            HStack {
+                        HStack {
                 Spacer()
                 
                 Button(action: {
@@ -58,13 +51,11 @@ struct CustomPicker: View {
             
             if isExpanded {
                 VStack(spacing: 10) {
-                    // Enumerating all the product category
-                    ForEach(ProductListEndpoint.allCases, id: \.self) { category in
+                                        ForEach(ProductListEndpoint.allCases, id: \.self) { category in
                         Button(action: {
                             withAnimation(.spring()) {
                                 choosenCategory = category
-                                isExpanded = false // Collapse after selection
-                            }
+                                isExpanded = false                             }
                         }) {
                             Text(category.rawValue)
                                 .bold()

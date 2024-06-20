@@ -1,10 +1,3 @@
-//
-//  HistoryView.swift
-//  ModerneShopping
-//
-//  Created by 张真瑜 on 2024/6/16.
-//
-
 import SwiftUI
 
 
@@ -42,8 +35,7 @@ struct HistoryView: View {
                             }
                         }
                     }
-                    .frame(height: 100) // Set a fixed height for the scroll view
-                }
+                    .frame(height: 100)                 }
                 .padding(.vertical, 4)
             }
         }

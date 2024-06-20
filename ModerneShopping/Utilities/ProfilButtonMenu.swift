@@ -1,14 +1,7 @@
-//
-//  ProfilButtonMenu.swift
-//  ModerneShopping
-//
-//  Created by Djallil Elkebir on 2021-09-06.
-//
 
 import SwiftUI
 
-/// Styling to the button in the profil view
-struct ProfilButtonMenu: ButtonStyle {
+/struct ProfilButtonMenu: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
             .font(.headline)

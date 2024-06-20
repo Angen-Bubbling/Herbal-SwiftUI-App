@@ -1,9 +1,3 @@
-//
-//  LoginView.swift
-//  ModerneShopping
-//
-//  Created by Djallil Elkebir on 2021-09-08.
-//
 
 import SwiftUI
 
@@ -20,7 +14,7 @@ struct LoginView: View {
         ZStack{
             Color.background.edgesIgnoringSafeArea(.all)
             VStack(alignment: .center,spacing: 16){
-                Text("Login")
+                Text("登录")
                     .font(.title3).bold()
                 LoginLottieView()
                     .aspectRatio(contentMode: .fit)
@@ -58,7 +52,7 @@ struct LoginView: View {
                         Button(action:{withAnimation{
                             showSheet.toggle()
                         }}){
-                            Text("Forgot Password ?")
+                            Text("忘记密码？")
                                 .font(.subheadline).bold()
                         }
                         .padding(8)
@@ -70,7 +64,7 @@ struct LoginView: View {
                             if user.isNameValid == true &&
                                 user.isPasswordValid == true {
                                 withAnimation{
-                                    //成功登陆
+                                    //成功登录
                                 }
                             } else {
                                 withAnimation{
@@ -80,7 +74,7 @@ struct LoginView: View {
                             }
                         }
                     }){
-                        Text("Sign In")
+                        Text("登录")
                             .foregroundColor(.darkText)
                             .font(.headline)
                             .padding()
@@ -91,7 +85,7 @@ struct LoginView: View {
                     Button(action:{withAnimation{
                         showSheet.toggle()
                     }}){
-                        Text("Create an account").font(.headline)
+                        Text("创建账户").font(.headline)
                             .foregroundColor(.darkText)
                             .shadow(color: .darkText.opacity(0.1), radius: 2, x: 1, y: 2)
                     }
@@ -103,23 +97,23 @@ struct LoginView: View {
             }.padding()
             .sheet(isPresented: $showSheet){
                 VStack {
-                    Text("Create an account")
+                    Text("创建账户")
                         .font(.headline)
                         .padding(.bottom, 20)
                     
-                    TextField("Email", text: $email)
+                    TextField("邮箱", text: $email)
                         .padding()
                         .background(Color.gray.opacity(0.2))
                         .cornerRadius(8)
                         .padding(.bottom, 10)
                     
-                    TextField("Username", text: $username)
+                    TextField("用户名", text: $username)
                         .padding()
                         .background(Color.gray.opacity(0.2))
                         .cornerRadius(8)
                         .padding(.bottom, 10)
                     
-                    TextField("Password", text: $password)
+                    TextField("密码", text: $password)
                         .padding()
                         .background(Color.gray.opacity(0.2))
                         .cornerRadius(8)
@@ -127,11 +121,11 @@ struct LoginView: View {
                     
                     Button(action: {
                                 user.createUser(email: email, username: username, password: password)
-                                print("Creating user with email: \(email) and username: \(username)")
+                                print("创建用户，邮箱: \(email) 和用户名: \(username)")
                                 showSheet = false
                                     })
                                     {
-                                        Text("Create User")
+                                        Text("创建用户")
                                             .font(.headline)
                                             .foregroundColor(.white)
                                             .padding()
@@ -161,7 +155,7 @@ struct LoginTextView: View{
     @Binding var isValid: Bool?
     var body: some View {
         HStack {
-            TextField("Username",text: $name)
+            TextField("用户名",text: $name)
                 .padding()
                 .background(Color.background)
                 .cornerRadius(16)
@@ -181,7 +175,7 @@ struct PasswordTextView: View{
         Group{
             if !showPassword{
                 HStack {
-                    SecureField("Password",text: $name)
+                    SecureField("密码",text: $name)
                         .padding()
                         .background(Color.background)
                         .cornerRadius(16)
@@ -209,3 +203,4 @@ struct PasswordTextView: View{
         }
     }
 }
+

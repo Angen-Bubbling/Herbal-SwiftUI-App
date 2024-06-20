@@ -1,9 +1,3 @@
-//
-//  HistoryViewModel.swift
-//  ModerneShopping
-//
-//  Created by 张真瑜 on 2024/6/18.
-//
 
 import Foundation
 import CoreData
@@ -33,8 +27,7 @@ class HistoryViewModel: ObservableObject {
         do {
             let results = try context.fetch(fetchRequest)
             self.historyList = results.map { history in
-                // Fetch related products and quantities
-                var productQuantities: [String: Int64] = [:]
+                                var productQuantities: [String: Int64] = [:]
                 var products: [Product] = []
 
                 if let quantities = history.quantity as? Set<ProductQuantity> {

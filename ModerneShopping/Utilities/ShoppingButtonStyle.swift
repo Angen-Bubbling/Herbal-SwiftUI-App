@@ -1,14 +1,7 @@
-//
-//  ShoppingButtonStyle.swift
-//  ModerneShopping
-//
-//  Created by Djallil Elkebir on 2021-09-01.
-//
 
 import SwiftUI
 
-/// Add a styling to the add cart button in product view, change to green and success when added to the cart
-struct AddCartButtonStyle: ButtonStyle {
+/struct AddCartButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         VStack(alignment: .leading) {
             HStack {

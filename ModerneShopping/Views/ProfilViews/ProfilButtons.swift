@@ -1,9 +1,3 @@
-//
-//  ProfilButtons.swift
-//  ModerneShopping
-//
-//  Created by Djallil Elkebir on 2021-09-06.
-//
 
 import SwiftUI
 
@@ -11,23 +5,10 @@ struct ProfilButtons: View {
     @EnvironmentObject var user: UserViewModel
     var body: some View {
         VStack {
-            NavigationLink(destination: ZStack {
-                Color.background.edgesIgnoringSafeArea(.all)
-                Text("Update Account")
-            }){
-                HStack {
-                    Text("Update Account")
-                    Image(systemName: "slider.horizontal.3")
-                }.font(.headline)
-                .padding()
-                .background(Color.secondaryBackground)
-                .cornerRadius(12)
-                .shadow(color: .accentColor.opacity(0.1), radius: 2, x: 0.5, y: 1)
-            }
             NavigationLink(destination: HistoryView()
             ){
                 HStack {
-                    Text("History")
+                    Text("历史记录")
                     Image(systemName: "cart.fill")
                 }.font(.headline)
                 .padding()
@@ -37,7 +18,7 @@ struct ProfilButtons: View {
             }
             Button(action:{withAnimation{user.signout()}}){
                 HStack {
-                    Text("Sign out")
+                    Text("退出登录")
                     Image(systemName: "person.crop.circle.fill.badge.xmark")
                 }.font(.headline)
                 .padding()
@@ -55,3 +36,4 @@ struct ProfilButtons_Previews: PreviewProvider {
         ProfilButtons()
     }
 }
+

@@ -7,23 +7,27 @@ struct HistoryDetailListView: View {
     var body: some View {
         HStack(spacing: 16) {
             SmallHistoryListItemImage(imageName: product.title)
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text(product.title)
                     .font(.headline)
                     .lineLimit(2)
                 Text("\(product.price, specifier: "%.2f") ¥")
+                    .font(.subheadline)
+                    .foregroundColor(.primary)
                 Text("数量: \(productQuantities[product.title] ?? 0)")
                     .font(.subheadline)
-                    .foregroundColor(.gray)
+                    .foregroundColor(.secondary)
             }
             Spacer()
         }
         .padding()
-        .background(Color.background)
-        .cornerRadius(8)
-        .shadow(color: .gray, radius: 2, x: 0.0, y: 0.0)
+        .background(Color(.systemBackground))
+        .cornerRadius(12)
+        .shadow(color: Color(.systemGray4), radius: 4, x: 0.0, y: 2)
     }
 }
+
+
 
 struct SmallHistoryListItemImage: View {
     let imageName: String

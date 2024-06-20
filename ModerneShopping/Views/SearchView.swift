@@ -1,10 +1,3 @@
-//
-//  SearchView.swift
-//  ModerneShopping
-//
-//  Created by 张真瑜 on 2024/6/16.
-//
-
 import SwiftUI
 
 struct SearchView: View {

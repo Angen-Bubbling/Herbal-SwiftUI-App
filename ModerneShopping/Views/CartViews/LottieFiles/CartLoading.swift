@@ -1,9 +1,3 @@
-//
-//  CartLoading.swift
-//  ModerneShopping
-//
-//  Created by Djallil Elkebir on 2021-09-06.
-//
 
 import SwiftUI
 import Lottie

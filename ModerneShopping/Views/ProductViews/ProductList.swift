@@ -1,9 +1,3 @@
-//
-//  ProductList.swift
-//  ModerneShopping
-//
-//  Created by Djallil Elkebir on 2021-09-02.
-//
 
 import SwiftUI
 
@@ -27,7 +21,7 @@ struct ProductList: View {
                     }, label: {
                         HStack {
                             Image(systemName: "cart.badge.plus")
-                            Text("Add to cart")
+                            Text("加入购物车")
                                 .font(.caption)
                                 .bold()
                         }

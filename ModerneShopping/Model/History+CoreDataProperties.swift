@@ -1,10 +1,3 @@
-//
-//  History+CoreDataProperties.swift
-//  ModerneShopping
-//
-//  Created by 张真瑜 on 2024/6/20.
-//
-//
 
 import Foundation
 import CoreData
@@ -31,7 +24,6 @@ extension History {
     
 }
 
-// MARK: Generated accessors for product
 extension History {
 
     @objc(addProductObject:)
@@ -48,7 +40,6 @@ extension History {
 
 }
 
-// MARK: Generated accessors for quantity
 extension History {
 
     @objc(addQuantityObject:)
