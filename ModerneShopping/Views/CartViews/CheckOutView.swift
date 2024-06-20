@@ -69,6 +69,7 @@ struct CheckOutView: View {
                         Button(action: {
                             cart.emptyAndStoreCart()
                             showSuccessAlert = true;
+                            self.notificationFeedback(type: .success)
                         }) {
                             Text("点击付款")
                                 .bold()
@@ -102,5 +103,8 @@ struct CheckOutView: View {
                     )
                 }
     }
-
+    private func notificationFeedback(type: UINotificationFeedbackGenerator.FeedbackType) {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(type)
+    }
 }

@@ -2,7 +2,8 @@ import SwiftUI
 
 struct HistoryDetailListView: View {
     let product: Product
-
+    let productQuantities: [String: Int64]
+    
     var body: some View {
         HStack(spacing: 16) {
             SmallHistoryListItemImage(imageName: product.title)
@@ -11,7 +12,7 @@ struct HistoryDetailListView: View {
                     .font(.headline)
                     .lineLimit(2)
                 Text("\(product.price, specifier: "%.2f") ¥")
-                Text("数量: \(product.number)")
+                Text("数量: \(productQuantities[product.title] ?? 0)")
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }

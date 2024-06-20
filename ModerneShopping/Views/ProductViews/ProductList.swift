@@ -22,6 +22,7 @@ struct ProductList: View {
                     Button(action: {
                         withAnimation{
                             cart.addToCart(addedProduct: product, quantity: 1)
+                            self.hapticFeedback()
                         }
                     }, label: {
                         HStack {
@@ -42,5 +43,9 @@ struct ProductList: View {
         }.sheet(item: $product){product in
             ProductView(product: product).environmentObject(cart)
         }
+    }
+    private func hapticFeedback() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
     }
 }

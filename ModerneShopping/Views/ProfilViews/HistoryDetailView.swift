@@ -24,7 +24,7 @@ struct HistoryDetailView: View {
                 ScrollView {
                         VStack {
                             ForEach(record.productList, id: \.self) { product in
-                                HistoryDetailListView(product: product)
+                                HistoryDetailListView(product: product,productQuantities: record.productQuantities)
                                     .padding(.vertical, 4)
                             }
                         }
